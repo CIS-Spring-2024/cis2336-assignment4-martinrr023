@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UH Cafeteria</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>The SL Corner</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="About Me.html">About Me</a></li>
+            <li><a href="order.html">Orders</a></li>
+            <link rel="stylesheet" href="style.css">
+        </ul>
+    </nav>
+
+    <link rel="stylesheet" href="style.css">
+        <img src="img/UHSL.png" class="img-uhsl">
+<!--Dyanmic Menu-->
+    <section class="menu">
+        <h1>Welcome to the SL corner, Here at the Sugarland campus we offer a variety of your classic American foods</h1>
+        <h2>ORDER HERE</h2>
+        <form id="orderForm">
+            <div class="menu-item">
+                <div class="text-content">
+                    <h3>Burgers $2.99</h3>
+                    <p>Juicy beef patties with fresh toppings.</p>
+                    <label for="burgers">Quantity:</label>
+                    <input type="number" id="burgers" name="burgers" min="0" value="0"><br>
+                </div>
+                <img src="img/burgers.jpg" class="menu-image">
+            </div>
+            
+            <div class="menu-item">
+                <div class="text-content">
+                    <h3>Wings 2 PC $5.99</h3>
+                    <p>Crispy chicken wings in signature sauces.</p>
+                    <label for="wings">Quantity:</label>
+                    <input type="number" id="wings" name="wings" min="0" value="0"><br>
+                </div>
+                <img src="img/HBBQ-wings-8.jpg" class="menu-image">
+            </div>
+            
+            <div class="menu-item">
+                <div class="text-content">
+                    <h3>Sandwiches $3.99</h3>
+                    <p>Hearty deli-style and grilled options.</p>
+                    <label for="sandwiches">Quantity:</label>
+                    <input type="number" id="sandwiches" name="sandwiches" min="0" value="0"><br>
+                </div>
+                <div>
+                    <img src="img/sandwhiches.jpeg" class="menu-image">
+                </div>
+
+                </div>
+            </div>
+            <div>   <input type="submit" value="Submit Order"> </div>
+                
+                <div class="total-display">
+                    <label for="total">Your Total is: $</label>
+                    <span id="total">0.00</span>
+                    <style>
+                        .total-display {
+                        background-color: #df0000;
+                        color: white;
+                        padding: 10px 20px;
+                        margin: 20px 0;
+                        margin-bottom: 1%;
+                        border: none;
+                        border-radius: 4px;
+                        cursor: pointer;  
+                        }
+                        </style>
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 The SL Corner. All rights reserved.</p>
+        <style>
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }</style>
+    </footer>
+<!--Submits the order-->
+<script>
+    document.getElementById("orderForm").onsubmit = function(event) {
+        event.preventDefault(); // Prevents form submission
+
+        // Prices
+        const burgerPrice = 2.99;
+        const wingsPrice = 5.99;
+        const sandwichesPrice = 3.99;
+
+        // Quantities
+        const burgerQuantity = parseInt(document.getElementById("burgers").value) || 0;
+        const wingsQuantity = parseInt(document.getElementById("wings").value) || 0;
+        const sandwichesQuantity = parseInt(document.getElementById("sandwiches").value) || 0;
+
+        // Validation messages
+        let validationMessages = [];
+
+        // Validate quantities are within range
+        if (burgerQuantity < 0 || burgerQuantity > 10) {
+            validationMessages.push("Burger quantity must be between 0 and 10.");
+        }
+        if (wingsQuantity < 0 || wingsQuantity > 10) {
+            validationMessages.push("Wings quantity must be between 0 and 10.");
+        }
+        if (sandwichesQuantity < 0 || sandwichesQuantity > 10) {
+            validationMessages.push("Sandwiches quantity must be between 0 and 10.");
+        }
+
+        // Check for zero quantities
+        if (burgerQuantity === 0 && wingsQuantity === 0 && sandwichesQuantity === 0) {
+            validationMessages.push("Please at least put one quantity in the form.");
+        }
+
+        // Check if there are any validation messages
+        if (validationMessages.length > 0) {
+            // Join all validation messages into a single string and alert it
+            alert("Please correct the following:\n" + validationMessages.join("\n"));
+        } else {
+            // Calculate total only if all inputs are valid
+            const total = (burgerPrice * burgerQuantity) + (wingsPrice * wingsQuantity) + (sandwichesPrice * sandwichesQuantity);
+
+            // Update total display
+            document.getElementById("total").textContent = total.toFixed(2);
+
+            // Alert the user if total is greater than 0
+            if (total > 0) {
+                alert("Order received! Your total is $" + total.toFixed(2));
+            } else {
+
+                alert("Please at least put one quantity in the form.");
+            }
+        }
+    };
+</script>
+
